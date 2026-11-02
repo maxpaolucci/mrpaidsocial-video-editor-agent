@@ -1,0 +1,144 @@
+{
+ "footage_root": "footage/Collected_Project",
+ "master": "source.mp4",
+ "edit": {
+  "sequences": "edl/sequences.json",
+  "sequence": "BRAND_Anthem_LF_v06",
+  "offset": 0.0,
+  "skip": [
+   "Adjustment",
+   "FilmBurn",
+   "Tagline",
+   "Nested Sequence"
+  ]
+ },
+ "format": {
+  "width": 1080,
+  "height": 1920,
+  "fps": "24000/1001",
+  "frames": 360
+ },
+ "music": {
+  "file": "audio/track.wav",
+  "bpm": 165.97,
+  "segments": [
+   {
+    "name": "open",
+    "src": 113.48791106826535,
+    "bars": 2
+   },
+   {
+    "name": "drop",
+    "src": 116.38,
+    "bars": 4
+   },
+   {
+    "name": "fill",
+    "src": 197.36,
+    "bars": 1
+   },
+   {
+    "name": "outro",
+    "src": 198.80604446586733
+   }
+  ],
+  "fade_in": 0.4,
+  "fade_out": 1.6,
+  "crossfade": 0.02
+ },
+ "audio": {
+  "lufs": -14,
+  "true_peak": -1
+ },
+ "plates": {
+  "open": {
+   "file": "stock/sky_plate.mp4",
+   "src": 0.0,
+   "x": 0.5
+  },
+  "close": {
+   "file": "stock/sky_plate.mp4",
+   "src": 8.0,
+   "x": 0.5
+  }
+ },
+ "leaks": {
+  "opacity": 0.7,
+  "dur": 0.8,
+  "open": {
+   "file": "overlays/Leak 01.mp4",
+   "lead": 0.27
+  },
+  "close": {
+   "file": "overlays/Leak 15.mp4",
+   "lead": 0.25
+  }
+ },
+ "endcard": {
+  "file": "endcard.mov",
+  "crop_x": 0.5,
+  "y": 400,
+  "fade_in": 0.3
+ },
+ "output": {
+  "prefix": "Brand_",
+  "revision": "v01"
+ },
+ "versions": {
+  "15-2": {
+   "script": "Toward clarity. Toward cures. Toward readiness and resilience. Toward sooner. Toward better. Toward home. Together, we lead on.",
+   "vo": [
+    {
+     "file": "audio/selects/15-2_take18.wav",
+     "at": "drop-0.86"
+    }
+   ],
+   "end_start": 10.55,
+   "endcard_src": 1.95,
+   "shots": [
+    {
+     "t": 2.89,
+     "mt": 43.7,
+     "x": 0.47,
+     "note": "hangar silhouettes - 'clarity'"
+    },
+    {
+     "t": 3.87,
+     "mt": 46.3,
+     "x": 0.6,
+     "note": "MRI pointing - 'cures'"
+    },
+    {
+     "t": 4.9,
+     "mt": 50.05,
+     "x": 0.6,
+     "note": "supercell - 'readiness'"
+    },
+    {
+     "t": 5.85,
+     "mt": 50.95,
+     "x": 0.3,
+     "note": "storm chaser - 'resilience'"
+    },
+    {
+     "t": 7.25,
+     "mt": 47.1,
+     "x": 0.5,
+     "note": "NICU baby - 'sooner'"
+    },
+    {
+     "t": 8.25,
+     "mt": 53.05,
+     "x": 0.6,
+     "note": "doctor with boy - 'better'"
+    },
+    {
+     "t": 9.37,
+     "mt": 54.6,
+     "x": 0.5,
+     "note": "campus hall wide, golden hour - 'home'"
+    }
+   ]
+  }
+ }
+}

@@ -595,3 +595,13 @@ publication step.
   (keys must be snake_case, `status` is reserved): manifest collection is now `review_events` with snake_case fields and
   `review_status`; `createRemoteStore` translates to/from the app's camelCase shape. Tests 16/16 (3 new). Verified with a
   hidden probe write + `read-notes.mjs` round trip.
+
+## 2026-11-02 — New skill: brand-cutdown
+- Turned the vertical cut-down workflow into `brand-cutdown`: `prproj.py` (sequences, sources, in points, disabled
+  clips), `resolve.py` (align master↔sequence, master|source sheets, auto-fill shots without overwriting hand-tuned
+  in points), `vo_takes.py`, `music_map.py`, config-driven `build_audio.py`/`build_video.py`, `qa_sheet.py`,
+  `publish_api.py` fallback. One `cutdown.json` per project; schema in references/config.md.
+- Verified by re-rendering the demo project through the skill: video matches the hand-built renders (PSNR ≈ 49.6 dB,
+  no frame < 40 dB); audio identical apart from a fixed bug (crossfaded music segments started 20 ms early).
+- The resolver now skips Premiere-disabled clips (`IsMuted`), which removed a manual track override.
+- 10 offline tests; wired into scripts/test.py (skips cleanly without numpy). Routed from video-edit-pipeline.

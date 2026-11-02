@@ -147,6 +147,7 @@ HyperFrames, whisper models, or ffmpeg.
 | `reel-style-clone` | Reverse-engineer a reference reel frame by frame into a STYLE-GUIDE.md + build directives. |
 | `arcads-video-edit` | Multi-take screen + camera + mic recordings → an EDL-driven base cut the reviewer locks, then a HyperFrames motion-graphics pass with takeovers, the base video as a character, captions, SFX and music. |
 | [Recap Video](.claude/skills/recap-video/SKILL.md) | Event/conference/travel recap: choose the best take per line, remove pauses and restarts, match supplied B-roll to narration, mix split/full layouts, verify and revise. Includes a portable base-cut assembler. |
+| `brand-cutdown` | A finished long-form brand film/commercial → :06/:15/:30 cut-downs in any aspect ratio: shots resolved to camera originals from the edit project, slated VO takes, bar-grid music edit, per-shot reframe + grade match, plates, light leaks and the alpha end card, from one `cutdown.json`. |
 | `hook-splitter` | One long recording of many hooks/takes → one tightened standalone video per hook, QA'd by re-transcribing the renders, delivered on a gallery canvas with a comment box per video. |
 | `hook-variations` | One approved body × N hooks → N standalone variants, joined losslessly, loudness-matched, verified with AVFoundation (not just ffmpeg). |
 | `edits-hook-overlay` | Instagram's native text hook (Edits font, boxes, anti-aliasing) typed once on a USB iPhone over a black/white plate, lifted as an exact transparent PNG and burned onto any number of videos; HDR phone footage stays untouched. |
