@@ -6,7 +6,9 @@ description: >-
   project file, camera originals, voiceover session and music stems. Resolves every master shot
   to its source clip and in point from the Premiere project, picks slated VO takes, cuts the
   music on its bar grid, reframes and grade-matches each shot to the master, then composites the
-  open/close plates, light leaks and the alpha end card. Use for "make cut-downs", "make :15s
+  open/close plates, light leaks and the alpha end card. Always starts by asking for the
+  materials, checking them, asking the key decisions and writing a plan for approval — nothing
+  renders before a go-ahead. Use for "make cut-downs", "make :15s
   from the long form", "vertical versions of the spot", "social cut-downs of this commercial",
   "re-edit the anthem as 9:16". Not for raw talking-head footage with no finished master
   (branded-ad-edit / reel-recut) or an event recap from takes (recap-video).
@@ -25,17 +27,55 @@ and `video-review-canvas` (delivery). Everything is driven by one `cutdown.json`
 [references/config.md](references/config.md) is the schema; `assets/cutdown.example.json` is a
 filled-in starting point.
 
-## What to ask for at intake
+## Start here: gather, ask, plan — then wait for a go
 
-One folder (or the paths to): the **master** export · the **edit project** (`.prproj`; an FCP XML
-export also records disabled clips) · the **camera originals** the project points at · the
-**final VO** and the **raw VO session** · the **music** full mix and stems · the **end card**
-(ProRes 4444 with alpha) and any logo slate · light-leak / transition overlays · the
-**scripts** for each version as text (an image of a deck page may not arrive). Ask which
-**aspect ratios and lengths**, and confirm the brand rules in `MASTER_CONTEXT.md` (brand anthems
-usually override social defaults: no captions, minimal SFX).
+Every invocation opens with this interview, even when the request already names some files.
+**Nothing is rendered, published or written outside the project folder until the user has
+approved the plan.** Read-only analysis (probing files, parsing the project, transcribing,
+mapping the music) is fine before approval — it is what makes the plan concrete.
+
+**1. Ask for the materials** in one message, as a checklist the user can answer with paths
+(a single project folder is ideal; say that a path to a mounted drive is fine):
+
+| # | Material | Why it matters |
+|---|---|---|
+| 1 | Master export of the long form | timing, grade and style reference |
+| 2 | Edit project (`.prproj`, or FCP XML) | exact source clip + in point for every shot |
+| 3 | Camera originals / collected media | full-resolution reframes |
+| 4 | Final VO and the raw VO session | slated takes for the short versions |
+| 5 | Music: full mix + stems | bar-aligned music edit |
+| 6 | End card (ProRes 4444 with alpha) + logo slate | the close |
+| 7 | Transition overlays (light leaks), bookend plates | the house transitions |
+| 8 | Scripts for each version, **as text** | images of deck pages may not arrive |
+
+**2. Check what arrived** before asking anything else: probe every file (duration, resolution,
+fps, codec, alpha), list folders, parse the project, and reply with a table — *found / missing /
+problem* (e.g. "edit project's `client-supplied/` is empty", "logo slate not provided", "archival
+clips are 480p"). Ask only for what is missing or broken; offer a fallback for each (crop from the
+master, end on the card without the logo slate).
+
+**3. Ask the decisions** with AskUserQuestion — at most four per round, recommended option first:
+- **Versions and lengths** (:06 / :15 / :30, how many of each) and **aspect ratios** (9:16, 1:1,
+  4:5, 16:9).
+- **Which part of the master** is in scope (e.g. skip a hyper-paced intro) and anything off-limits
+  (people, shots with rights limits, burned-in graphics).
+- **Captions and sound**: brand anthems usually run clean (no captions, minimal SFX) — confirm, and
+  check `MASTER_CONTEXT.md` hard rules.
+- **Delivery**: review canvases public link / password / invite-only, file naming, deadline.
+Script text and anything with no fixed options are asked in plain text, not as buttons.
+
+**4. Analyse, then write the plan.** Run Pipeline steps 1–4 below (style guide, project parse,
+VO map, music map), then fill `assets/plan.template.md` into `<project>/plan.md`: per version the
+script, the chosen VO takes (with alternates), the music structure on the bar grid, the draft shot
+list (beat → shot → why) with a master|source sheet from `resolve.py --at`, reframe risks, open
+questions, and exactly what will be rendered and published. Present a short summary with a link to
+the plan and **stop**. Revise on feedback; build only on an explicit go-ahead ("approved", "build
+it"). If the user asked to skip planning, say once what is being assumed and proceed.
 
 ## Pipeline
+
+Steps 1–4 are the analysis that feeds the plan; steps 5–10 run after it is approved.
+
 
 1. **Style first.** Run `reel-style-clone` on the master's main section (skip any intro the user
    excludes). The guide names the bookends, the chapter transitions, what each shot is *for*,
