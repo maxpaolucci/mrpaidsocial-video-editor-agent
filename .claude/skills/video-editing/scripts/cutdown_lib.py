@@ -1,4 +1,4 @@
-"""Shared helpers for brand-cutdown: config, ffmpeg wrappers, timing and colour utilities.
+"""Shared helpers for video-editing: config, ffmpeg wrappers, timing and colour utilities.
 
 Every script takes the project's cutdown.json; relative paths in it resolve against the
 config file's directory, and `footage_root` is joined onto shot/plate/leak file names."""

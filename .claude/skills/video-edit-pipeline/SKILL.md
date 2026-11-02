@@ -8,7 +8,7 @@ description: >
   clip into a finished reel", "do the full edit", "make this look like their
   winning ads", or a revision request on a previously delivered edit. It routes
   every stage to the right specialist skill (reel-style-clone, branded-ad-edit,
-  reel-recut, arcads-video-edit, recap-video, brand-cutdown, talking-head-image-overlays, hook-splitter, edits-hook-overlay,
+  reel-recut, arcads-video-edit, recap-video, video-editing, talking-head-image-overlays, hook-splitter, edits-hook-overlay,
   sound-design, ai-audio-sound-design,
   video-qa, video-review-canvas, edl-tighten, hook-variations, naming-convention,
   capcut-export) and
@@ -94,7 +94,7 @@ the shared footage catalog. These receipts add no user approval gates.
      new intermediate approvals when the user requested a finished first cut.
    - a **finished long-form brand film or commercial to cut down** (:06/:15/:30, often a new
      aspect ratio) with its edit project, camera originals, VO session and music stems →
-     **brand-cutdown** (run reel-style-clone on the master first), then Stages 4–6. It owns
+     **video-editing** (run reel-style-clone on the master first), then Stages 4–6. It owns
      shot sourcing, VO take selection, the music edit, reframes and grade matching.
    - **one long recording of many hooks/takes** → **hook-splitter**; an approved body
      that needs many openers → **hook-variations** (Stage 6b).
@@ -299,7 +299,7 @@ draft opens before telling the user it is ready.
 | Spec-driven short-form recut style (the creator's own look, or a graphics-free raw cut) | reel-recut |
 | Multi-take screen + camera + mic demo → EDL base cut → motion-graphics pass | arcads-video-edit |
 | Event recap from spoken takes + supplied B-roll, split/full layouts and line-anchored revisions | recap-video |
-| Finished long-form brand spot → :06/:15/:30 cut-downs in any aspect, from the edit project | brand-cutdown |
+| Finished long-form brand spot → :06/:15/:30 cut-downs in any aspect, from the edit project | video-editing |
 | One long recording of many hooks → one tightened video per hook (+ gallery canvas) | hook-splitter |
 | Native Instagram (Edits) text hook typed once on the phone, lifted as a PNG and burned onto many videos | edits-hook-overlay |
 | AI-actor footage: ambience, room reverb, bleeps, watermark whine, loudness master | ai-audio-sound-design |

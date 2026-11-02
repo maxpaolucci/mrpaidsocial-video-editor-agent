@@ -605,3 +605,5 @@ publication step.
   no frame < 40 dB); audio identical apart from a fixed bug (crossfaded music segments started 20 ms early).
 - The resolver now skips Premiere-disabled clips (`IsMuted`), which removed a manual track override.
 - 10 offline tests; wired into scripts/test.py (skips cleanly without numpy). Routed from video-edit-pipeline.
+- Renamed the skill `brand-cutdown` → `video-editing` at the owner's request; scope and description unchanged
+  (cut-downs of finished long-form spots).

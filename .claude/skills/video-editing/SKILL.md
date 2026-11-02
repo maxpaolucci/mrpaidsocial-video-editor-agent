@@ -1,5 +1,5 @@
 ---
-name: brand-cutdown
+name: video-editing
 description: >-
   Cut an existing long-form brand film, anthem or commercial down into short versions
   (:06/:15/:30) in any aspect ratio — usually vertical 9:16 for social — using the edit's own
@@ -12,7 +12,7 @@ description: >-
   (branded-ad-edit / reel-recut) or an event recap from takes (recap-video).
 ---
 
-# Brand cut-down
+# Video Editing
 
 A finished long-form spot already contains every decision a short version needs: the shots,
 their grade, the voice, the music and the end card. The cut-down's job is to **re-use those

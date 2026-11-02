@@ -21,11 +21,11 @@ def main():
     commands = [[sys.executable, "-m", "unittest", "discover", "-s", "scripts/tests", "-p", "test_*.py", "-v"]]
     if (ROOT / "tools/editor/tests").is_dir():
         commands.append([sys.executable, "-m", "unittest", "discover", "-s", "tools/editor/tests", "-p", "test_*.py", "-v"])
-    if (ROOT / ".claude/skills/brand-cutdown/tests").is_dir():
+    if (ROOT / ".claude/skills/video-editing/tests").is_dir():
         if importlib.util.find_spec("numpy"):
-            commands.append([sys.executable, "-m", "unittest", "discover", "-s", ".claude/skills/brand-cutdown/tests", "-p", "test_*.py", "-v"])
+            commands.append([sys.executable, "-m", "unittest", "discover", "-s", ".claude/skills/video-editing/tests", "-p", "test_*.py", "-v"])
         else:
-            print("SKIP  brand-cutdown suite: numpy is unavailable", flush=True)
+            print("SKIP  video-editing suite: numpy is unavailable", flush=True)
     canvas_tests = sorted((ROOT / ".claude/skills/video-review-canvas").glob("tests/*.test.mjs"))
     if canvas_tests and node_ready():
         commands.append(["node", "--test", *map(str, canvas_tests)])

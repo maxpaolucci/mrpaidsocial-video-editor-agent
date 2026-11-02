@@ -1,5 +1,5 @@
-"""Offline tests for brand-cutdown's pure logic (no footage, no network).
-Run: python3 -m unittest discover -s .claude/skills/brand-cutdown/tests -v"""
+"""Offline tests for video-editing's pure logic (no footage, no network).
+Run: python3 -m unittest discover -s .claude/skills/video-editing/tests -v"""
 import gzip, json, subprocess, sys, tempfile, unittest
 from pathlib import Path
 
