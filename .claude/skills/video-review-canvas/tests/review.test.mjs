@@ -49,7 +49,7 @@ test('local adapter persists across instances and does not reseed or duplicate a
 test('remote adapter follows pagination and supports pre-v2 sites without events',async()=>{
   const calls=[];
   const fetcher=async(url,opts)=>{calls.push([url,opts]);
-    if(url.includes('reviewEvents'))return {status:404,ok:false};
+    if(url.includes('review_events'))return {status:404,ok:false};
     return {ok:true,json:async()=>url.includes('cursor=next')?{records:[{...comment,id:'note-2'}]}:{records:[comment],nextCursor:'next'}};
   };
   const data=await createRemoteStore(fetcher).read();assert.equal(data.comments.length,2);assert.equal(data.events.length,0);
@@ -60,7 +60,28 @@ test('remote append uses an idempotency key and never credentials',async()=>{
   let captured;const store=createRemoteStore(async(url,options)=>{captured={url,options};return {ok:true,json:async()=>({id:'reply'})};});
   await store.append('events',{commentId:'note-1',kind:'reply',text:'Great'},'request-1');
   assert.equal(captured.options.headers['Idempotency-Key'],'request-1');assert.equal(captured.options.headers.Authorization,undefined);
-  assert.ok(captured.url.endsWith('reviewEvents'));
+  assert.ok(captured.url.endsWith('review_events'));
+  assert.deepEqual(JSON.parse(captured.options.body),{comment_id:'note-1',kind:'reply',text:'Great'});
+});
+
+test('remote events round-trip snake_case Site Data keys to the camelCase record shape',async()=>{
+  const store=createRemoteStore(async url=>({ok:true,json:async()=>url.includes('review_events')
+    ?{records:[{id:'e1',data:{comment_id:'note-1',kind:'evidence',review_status:'resolved',before_version:'v1',before_t:1.5,after_frame:40}}]}
+    :{records:[]}}));
+  const {events}=await store.read();
+  assert.deepEqual(events[0].data,{commentId:'note-1',kind:'evidence',status:'resolved',beforeVersion:'v1',beforeT:1.5,afterFrame:40});
+  let body;const writer=createRemoteStore(async(url,o)=>{body=JSON.parse(o.body);return {ok:true,json:async()=>({})};});
+  await writer.append('events',{commentId:'note-1',kind:'status',status:'resolved'},'r');
+  assert.deepEqual(body,{comment_id:'note-1',kind:'status',review_status:'resolved'});
+});
+
+test('Site Data manifest keys satisfy the here.now key pattern and avoid reserved names',()=>{
+  const reserved=new Set(['id','site_slug','collection','data','status','created_at','updated_at','created_by_account_id']);
+  const manifest=JSON.parse(readFileSync(new URL('../assets/data.json',import.meta.url),'utf8'));
+  for(const [name,col] of Object.entries(manifest.collections)){
+    assert.match(name,/^[a-z][a-z0-9_]*$/);
+    for(const field of Object.keys(col.fields)){assert.match(field,/^[a-z][a-z0-9_]*$/);assert.ok(!reserved.has(field),field);}
+  }
 });
 
 test('old single-video configs preserve both existing download variants and bold notes',t=>{

@@ -42,9 +42,9 @@
       },
       "rateLimit": "300/hour/ip"
     },
-    "reviewEvents": {
+    "review_events": {
       "fields": {
-        "commentId": {
+        "comment_id": {
           "type": "string",
           "required": true,
           "maxLength": 1000
@@ -60,7 +60,7 @@
           "trim": true,
           "default": "Reviewer"
         },
-        "status": {
+        "review_status": {
           "type": "string",
           "maxLength": 20
         },
@@ -69,27 +69,27 @@
           "maxLength": 1000,
           "trim": true
         },
-        "beforeVersion": {
+        "before_version": {
           "type": "string",
           "maxLength": 60
         },
-        "beforeT": {
+        "before_t": {
           "type": "number",
           "minimum": 0
         },
-        "beforeFrame": {
+        "before_frame": {
           "type": "number",
           "minimum": 0
         },
-        "afterVersion": {
+        "after_version": {
           "type": "string",
           "maxLength": 60
         },
-        "afterT": {
+        "after_t": {
           "type": "number",
           "minimum": 0
         },
-        "afterFrame": {
+        "after_frame": {
           "type": "number",
           "minimum": 0
         }

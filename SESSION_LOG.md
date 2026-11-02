@@ -580,3 +580,18 @@ five skill validations. Rechecked whitespace and public-repository hygiene befor
 committing. Media, credentials, local review storage and personal configuration
 remain ignored. No architecture or implementation changes were needed for this
 publication step.
+
+## 2026-11-02 — University brand-anthem :15 cut-downs (9:16)
+- Setup on a new machine: FFmpeg 9 removed `-filter_complex_script`; `recap-video` and `reel-recut` now use
+  `-/filter_complex` (available since FFmpeg 7).
+- Built three 15.015s vertical cut-downs from a long-form brand spot, scripts from the agency deck.
+- VO: slated :15 takes picked from the raw session, edit points snapped to silence and verified by re-transcribing each select.
+- Music: bar-grid edit of the licensed track (breakdown → drop → peak → final fill bar → outro), -14 LUFS / -1 dBTP.
+- Picture: shots resolved to camera originals by parsing the Premiere project; per-shot 9:16 reframe (incl. a tracking
+  crop), per-shot 1D LUT histogram-matched to the graded master, light leaks + alpha end card composited.
+- Delivered on local review canvases (here.now not signed in). Lesson: prefer the project file over the master for
+  sourcing; check every reframe in rendered pixels (one crop lost the subject, one letterbox leaked).
+- Follow-up: published the three canvases to here.now. Fixed `video-review-canvas` for current here.now Site Data rules
+  (keys must be snake_case, `status` is reserved): manifest collection is now `review_events` with snake_case fields and
+  `review_status`; `createRemoteStore` translates to/from the app's camelCase shape. Tests 16/16 (3 new). Verified with a
+  hidden probe write + `read-notes.mjs` round trip.

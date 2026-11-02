@@ -66,6 +66,19 @@ export function createLocalStore(storage, key, seed = {}) {
   };
 }
 
+// here.now Site Data keys must match /^[a-z][a-z0-9_]*$/ and avoid reserved names (status, id, data, ...),
+// so the wire format is snake_case with `status` stored as `review_status`, while the app keeps its
+// camelCase record shape; translate only at this boundary.
+const EVENTS = 'review_events';
+const WIRE_ALIAS = {status: 'review_status'};
+const APP_ALIAS = Object.fromEntries(Object.entries(WIRE_ALIAS).map(([a, w]) => [w, a]));
+const toWire = data => Object.fromEntries(Object.entries(data).map(([k, v]) =>
+  [WIRE_ALIAS[k] || k.replace(/[A-Z]/g, c => '_' + c.toLowerCase()), v]));
+const fromWire = record => record && record.data
+  ? {...record, data: Object.fromEntries(Object.entries(record.data).map(([k, v]) =>
+    [APP_ALIAS[k] || k.replace(/_([a-z])/g, (_, c) => c.toUpperCase()), v]))}
+  : record;
+
 export function createRemoteStore(fetcher, base = './.herenow/data/') {
   async function list(collection, optional = false) {
     const records = [], cursors = new Set();
@@ -85,14 +98,14 @@ export function createRemoteStore(fetcher, base = './.herenow/data/') {
   }
   return {
     async read() {
-      const [comments, events] = await Promise.all([list('comments'), list('reviewEvents', true)]);
-      return {comments, events};
+      const [comments, events] = await Promise.all([list('comments'), list(EVENTS, true)]);
+      return {comments, events: events.map(fromWire)};
     },
     async append(collection, data, id = globalThis.crypto.randomUUID()) {
-      const name = collection === 'comments' ? 'comments' : collection === 'events' ? 'reviewEvents' : null;
+      const name = collection === 'comments' ? 'comments' : collection === 'events' ? EVENTS : null;
       if (!name) throw new Error('Unknown review collection');
       const response = await fetcher(base + name, {method: 'POST',
-        headers: {'content-type': 'application/json', 'Idempotency-Key': id}, body: JSON.stringify(data)});
+        headers: {'content-type': 'application/json', 'Idempotency-Key': id}, body: JSON.stringify(toWire(data))});
       if (!response.ok) throw new Error(`Could not save review (HTTP ${response.status})`);
       return response.json();
     }
