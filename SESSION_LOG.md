@@ -607,3 +607,14 @@ publication step.
 - 10 offline tests; wired into scripts/test.py (skips cleanly without numpy). Routed from video-edit-pipeline.
 - Renamed the skill `brand-cutdown` → `video-editing` at the owner's request; scope and description unchanged
   (cut-downs of finished long-form spots).
+
+## 2026-11-09 — SFX pass on a finished brand anthem (long form)
+- The client asked for an extra SFX pass on a mixed 73.7 s spot (music + VO + SFX stems supplied). The analysis found
+  the existing SFX were dense in the intro and near-silent from 37 s to the end, so the pass covered 37 s to the end:
+  16 ElevenLabs effects (2 dud generations replaced automatically), subtle except one big crowd moment.
+- The stems did not match the delivered mix in the last 14 s (a missing boom and sting). The effects were layered on the
+  delivered mix with an add-only limiter. The original was untouched within 0.1 dB, at the same LUFS, LRA and peaks,
+  and the picture MD5 was identical. Delivered on a canvas with an original-vs-v1 A/B and a separate new-SFX stem.
+- Skill touched: sound-design (new §4b, adding SFX to a finished mix). video-qa flagged 5 issues, all identical on the
+  original (intro black/freeze, an intentional flash frame, the master's own loudness and peak).
+

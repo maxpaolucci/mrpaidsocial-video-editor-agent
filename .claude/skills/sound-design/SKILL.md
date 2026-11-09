@@ -185,6 +185,28 @@ Order of operations matters — every ratio below assumes step 1 happened first.
    - **One biggest swell per video** (usually the opener sub-drop or the final
      reveal). If everything is big, nothing is.
 
+## 4b. Adding SFX to a finished, approved mix
+
+When the client wants "more sound design" on a spot that is already mixed and approved:
+
+- **Null-test the stems before trusting them.** Sum the stems, align them against the delivered mix
+  (AAC decodes usually lag by the 1024-sample priming), and measure the residual per second. Late
+  fixes such as a boom, a sting or a re-mixed end card often never make it into the stems. Where the
+  residual is close to the mix level, remixing from the stems would silently drop approved audio.
+  Layer the new effects onto the delivered mix instead, and ship the new effects as their own stem.
+- **Set each cue's level relative to the mix in its own window** (the effect's active RMS against the
+  mix RMS there), not as an absolute gain. "Subtle" is then about 12–19 dB under the local mix, and
+  "the big moment" is +2–4 dB over it. That stays true in a loud montage and in a quiet end card.
+  Measure the add-vs-original delta per cue window. A cue more than about 20 dB under is inaudible.
+- **Never bus-limit the approved mix to hit a loudness spec.** If it already peaks over the
+  ceiling, a limiter reshapes the whole spot by about 1 dB. Limit only the added signal, against the
+  original's own local peak envelope, then apply a static trim of at most a few tenths of a dB.
+  Write float WAV, so the original's overs survive into the encode.
+- **Re-measure after the AAC encode.** ffmpeg's native `aac` encoder dropped about 0.3 LU against the
+  WAV. Apple's `aac_at` (macOS) matched the original's I, LRA and peak exactly.
+- Prove the picture is untouched: `ffmpeg -i X -map 0:v -c copy -f md5 -` gives the same hash
+  for the original and the new file.
+
 ## 5. Verify the mix — in dB, never by ear alone
 
 Every audio bug ever caught in this pipeline was found by measuring, not listening.
